@@ -1,16 +1,18 @@
 "use client"
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Award, Shield, Clock, CheckCircle } from "lucide-react"
+import { companyInfo } from "@/lib/company-info"
+import { Award, Shield, Leaf, CheckCircle, ArrowRight } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 const highlights = [
-  "Diagnostiqueurs certifiés et assurés",
-  "Rapports conformes aux normes en vigueur",
-  "Intervention rapide sous 48h",
-  "Tarifs transparents et compétitifs",
-  "Conseils personnalisés gratuits",
-  "Service client disponible 6j/7",
+  "Société à mission engagée",
+  "Expertise thermique & énergétique",
+  "Diagnostics immobiliers certifiés",
+  "Ingénierie structure béton, bois, métal",
+  "Formation professionnelle agréée",
+  "Conseil et assistance MOA",
 ]
 
 export function AboutSection() {
@@ -29,12 +31,12 @@ export function AboutSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-20 bg-[#f8fafc] overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-4">
-          <span className="inline-block bg-[#7cb342]/10 text-[#7cb342] px-4 py-1.5 rounded-full text-sm font-bold mb-3">
-            Bienvenus
+        <div className="text-center mb-6">
+          <span className="inline-block bg-[#7cb342]/10 text-[#7cb342] px-5 py-2 rounded-full text-sm font-bold mb-3">
+            Qui sommes-nous
           </span>
         </div>
 
@@ -45,36 +47,36 @@ export function AboutSection() {
           >
             <div className="relative">
               {/* Main Image */}
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gray-200">
                 <Image
-                  src="/professional-diagnostician-inspecting-house-therma.jpg"
-                  alt="Diagnostiqueur ENEOS Habitat en intervention"
+                  src="/professional-energy-renovation-team-meeting-with-c.jpg"
+                  alt="Équipe ENEOS HABITAT - Bureau d'études"
                   width={800}
                   height={600}
                   className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* Floating Experience Badge */}
-              <div className="absolute -bottom-6 -right-6 bg-white p-5 rounded-2xl shadow-xl border border-gray-100 animate-float">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-[#7cb342] rounded-xl flex items-center justify-center">
-                    <span className="text-3xl font-bold text-white">+10</span>
+              {/* Floating Badge - Société à mission */}
+              <div className="absolute -bottom-6 -right-6 bg-gradient-to-br from-[#7cb342] to-[#689f38] p-6 rounded-2xl shadow-2xl animate-float">
+                <div className="flex items-center gap-3">
+                  <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                    <Leaf className="h-8 w-8 text-white" />
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500">ans d'expérience</p>
-                    <p className="font-bold text-[#1e3a5f]">dans le contrôle qualité</p>
+                  <div className="text-white">
+                    <p className="font-bold text-lg">Société</p>
+                    <p className="text-white/90 text-sm">à mission</p>
                   </div>
                 </div>
               </div>
 
               {/* Certification Badge */}
-              <div className="absolute -top-4 -left-4 bg-[#1e3a5f] text-white p-4 rounded-xl shadow-lg">
+              <div className="absolute -top-4 -left-4 bg-[#1e3a5f] text-white p-5 rounded-2xl shadow-2xl border-2 border-white">
                 <div className="flex items-center gap-3">
                   <Shield className="h-8 w-8 text-[#7cb342]" />
                   <div>
-                    <p className="font-bold">Certifié</p>
-                    <p className="text-white/80 text-xs">& Assuré</p>
+                    <p className="font-bold text-base">Bureau</p>
+                    <p className="text-white/80 text-sm">d'Études</p>
                   </div>
                 </div>
               </div>
@@ -85,77 +87,76 @@ export function AboutSection() {
           <div
             className={`transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"}`}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-6 leading-tight">
-              Bienvenue chez <span className="text-[#7cb342]">ENEOS Habitat</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1e3a5f] mb-6 leading-tight">
+              Bienvenue chez <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7cb342] to-[#689f38]">ENEOS HABITAT</span>
             </h2>
 
             <div className="space-y-4 text-gray-600 mb-8">
               <p className="leading-relaxed text-lg">
-                <strong className="text-[#1e3a5f]">ENEOS Habitat</strong> est votre partenaire de confiance pour
-                réaliser vos <strong className="text-[#1e3a5f]">diagnostics immobiliers</strong> en Île-de-France et ses
-                environs.
+                <strong className="text-[#1e3a5f]">ENEOS HABITAT</strong> est une{" "}
+                <span className="text-[#7cb342] font-semibold">société à mission</span> créée en août 2025, 
+                spécialisée dans l'ingénierie thermique, énergétique et structurelle du bâtiment.
               </p>
-              <p className="leading-relaxed">
-                Notre cabinet est composé de diagnostiqueurs certifiés et expérimentés qui vous accompagnent dans tous
-                vos projets immobiliers : vente, location, travaux ou mise en conformité.
+              <p className="leading-relaxed text-base">
+                Notre expertise couvre l'ensemble des besoins en <strong className="text-[#1e3a5f]">études techniques</strong> et{" "}
+                <strong className="text-[#1e3a5f]">diagnostics immobiliers</strong>, de la conception à la réalisation 
+                de vos projets de construction et de rénovation.
               </p>
             </div>
 
-            <div className="bg-[#1e3a5f] text-white rounded-2xl p-6 mb-8">
-              <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                <Award className="h-6 w-6 text-[#7cb342]" />
-                Pourquoi faire appel à ENEOS Habitat ?
+            <div className="bg-gradient-to-br from-[#1e3a5f] to-[#2c5282] text-white rounded-3xl p-8 mb-8 shadow-xl">
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#7cb342] rounded-xl flex items-center justify-center">
+                  <Award className="h-6 w-6 text-white" />
+                </div>
+                Notre mission
               </h3>
-              <p className="text-white/80 leading-relaxed">
-                En tant que diagnostiqueur, notre objectif est de vous fournir un Dossier de Diagnostic Technique
-                complet et rigoureux. Nous prenons le temps d'examiner minutieusement votre bien pour ne rien laisser au
-                hasard.
+              <p className="text-white/90 leading-relaxed">
+                {companyInfo.mission.description}
               </p>
             </div>
 
             {/* Highlights Grid */}
-            <div className="grid sm:grid-cols-2 gap-3 mb-8">
+            <div className="grid sm:grid-cols-2 gap-4 mb-8">
               {highlights.map((item, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-[#7cb342]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <CheckCircle className="h-4 w-4 text-[#7cb342]" />
+                <div key={index} className="flex items-start gap-3 group">
+                  <div className="w-6 h-6 bg-[#7cb342]/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#7cb342] transition-colors">
+                    <CheckCircle className="h-4 w-4 text-[#7cb342] group-hover:text-white transition-colors" />
                   </div>
-                  <span className="text-[#1e3a5f] font-medium text-sm">{item}</span>
+                  <span className="text-[#1e3a5f] font-medium text-sm leading-relaxed">{item}</span>
                 </div>
               ))}
             </div>
 
-            {/* Stats */}
-            <div className="flex gap-8 mb-8 pb-8 border-b border-gray-200">
+            {/* Stats Premium */}
+            <div className="grid grid-cols-3 gap-6 mb-8 p-6 bg-gray-50 rounded-2xl border border-gray-100">
               <div className="text-center">
-                <div className="flex items-center justify-center gap-1">
-                  <Clock className="h-5 w-5 text-[#7cb342]" />
-                  <span className="text-2xl font-bold text-[#1e3a5f]">48h</span>
-                </div>
-                <p className="text-gray-500 text-xs">Délai intervention</p>
+                <div className="text-3xl font-bold text-[#7cb342] mb-1">24h</div>
+                <p className="text-gray-600 text-xs font-medium">Réponse rapide</p>
+              </div>
+              <div className="text-center border-l border-r border-gray-200">
+                <div className="text-3xl font-bold text-[#7cb342] mb-1">5</div>
+                <p className="text-gray-600 text-xs font-medium">Services experts</p>
               </div>
               <div className="text-center">
-                <span className="text-2xl font-bold text-[#1e3a5f]">98%</span>
-                <p className="text-gray-500 text-xs">Clients satisfaits</p>
-              </div>
-              <div className="text-center">
-                <span className="text-2xl font-bold text-[#1e3a5f]">2000+</span>
-                <p className="text-gray-500 text-xs">Diagnostics réalisés</p>
+                <div className="text-3xl font-bold text-[#7cb342] mb-1">2025</div>
+                <p className="text-gray-600 text-xs font-medium">Création</p>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="mailto:Contact@eneoshabitat.fr">
-                <Button className="bg-[#7cb342] text-white hover:bg-[#689f38] px-6 py-5 rounded-full font-semibold shadow-lg">
-                  contact@eneoshabitat.fr
+              <Link href="/a-propos">
+                <Button className="bg-gradient-to-r from-[#7cb342] to-[#689f38] text-white hover:from-[#689f38] hover:to-[#558b2f] px-8 py-6 rounded-full font-bold shadow-xl group">
+                  En savoir plus
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
-              </a>
-              <a href="tel:+33661070891">
+              </Link>
+              <a href={`mailto:${companyInfo.contact.email}`}>
                 <Button
                   variant="outline"
-                  className="border-2 border-[#1e3a5f] text-[#1e3a5f] hover:bg-[#1e3a5f] hover:text-white bg-transparent px-6 py-5 rounded-full font-semibold"
+                  className="border-2 border-[#1e3a5f] text-[#1e3a5f] hover:bg-[#1e3a5f] hover:text-white px-8 py-6 rounded-full font-bold"
                 >
-                  06 61 07 08 91
+                  Nous contacter
                 </Button>
               </a>
             </div>

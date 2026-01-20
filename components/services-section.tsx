@@ -1,85 +1,18 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { companyInfo } from "@/lib/company-info"
 import { Button } from "@/components/ui/button"
+import { Lightbulb, Building2, GraduationCap, Users, ArrowRight, CheckCircle } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
 
-const services = [
-  {
-    title: "Amiante",
-    description:
-      "Recherche d'Amiante pour les biens dont le permis de construire a été délivré avant le 1er Juillet 1997, obligations dans le cadre d'une vente ou d'une location.",
-    image: "/asbestos-inspection-building-materials-professiona.jpg",
-    href: "/services/amiante",
-    color: "#e53935",
-  },
-  {
-    title: "Plomb",
-    description:
-      "Recherche de Plomb pour les biens dont le permis de construire a été délivré avant 1949, obligations dans le cadre d'une vente ou d'une location.",
-    image: "/lead-paint-inspection-old-house-wall.jpg",
-    href: "/services/plomb",
-    color: "#8e24aa",
-  },
-  {
-    title: "Termites",
-    description:
-      "Diagnostic d'état relatif à la présence de termites selon une zone infestée identifiée par arrêté préfectorale. Obligation dans le cadre d'une vente.",
-    image: "/termite-inspection-wood-damage-house.jpg",
-    href: "/services/termites",
-    color: "#6d4c41",
-  },
-  {
-    title: "Électricité",
-    description:
-      "Diagnostic Électricité sur les biens immobiliers dont l'installation a plus de 15 ans. Obligation dans le cadre d'une vente ou location.",
-    image: "/electrical-panel-inspection-safety-professional.jpg",
-    href: "/services/electricite",
-    color: "#fdd835",
-  },
-  {
-    title: "Gaz",
-    description:
-      "Diagnostic Gaz sur les biens immobiliers dont l'installation a plus de 15 ans. Obligation dans le cadre d'une vente ou location.",
-    image: "/gas-installation-inspection-safety-boiler.jpg",
-    href: "/services/gaz",
-    color: "#fb8c00",
-  },
-  {
-    title: "DPE",
-    description:
-      "Diagnostic de performance énergétique sur tout biens immobilier disposant d'un moyen de chauffage. Obligation dans le cadre d'une vente ou location.",
-    image: "/energy-performance-certificate-house-thermal.jpg",
-    href: "/services/dpe",
-    color: "#7cb342",
-  },
-  {
-    title: "ERP",
-    description:
-      "Etat des risques et pollutions selon la localisation de votre bien défini par arrêté préfectorale. Obligation dans le cadre d'une vente ou location.",
-    image: "/environmental-risk-assessment-map-document.jpg",
-    href: "/services/erp",
-    color: "#00acc1",
-  },
-  {
-    title: "Loi Carrez",
-    description:
-      "Mesure de la surface privative pour les biens situé en copropriété. Obligation dans le cadre d'une vente.",
-    image: "/apartment-floor-plan-measurement-professional.jpg",
-    href: "/services/carrez",
-    color: "#5c6bc0",
-  },
-  {
-    title: "Loi Boutin",
-    description:
-      "Mesure de la surface habitable pour les maisons individuelles ou les appartements. Obligation dans le cadre d'une location.",
-    image: "/house-interior-measurement-tape-living-room.jpg",
-    href: "/services/boutin",
-    color: "#26a69a",
-  },
-]
+const serviceIcons = {
+  "etudes-thermiques": Lightbulb,
+  "diagnostics-immobiliers": Building2,
+  "ingenierie-structure": Building2,
+  "formation": GraduationCap,
+  "conseil": Users,
+}
 
 export function ServicesSection() {
   const [isVisible, setIsVisible] = useState(false)
@@ -97,67 +30,79 @@ export function ServicesSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-20 bg-white">
+    <section ref={sectionRef} className="py-24 bg-white">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-4">
-          <span className="inline-block bg-[#1e3a5f]/10 text-[#1e3a5f] px-4 py-1.5 rounded-full text-sm font-bold mb-3 uppercase tracking-wide">
-            Les Diagnostics
+        <div className="text-center mb-16">
+          <span className="inline-block bg-[#7cb342]/10 text-[#7cb342] px-5 py-2 rounded-full text-sm font-bold mb-4">
+            Nos Services
           </span>
-        </div>
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] text-center md:text-left">
-            Les prestations <span className="text-[#7cb342]">obligatoires</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1e3a5f] mb-4">
+            Nos domaines d'<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7cb342] to-[#689f38]">expertise</span>
           </h2>
-          <Link href="/devis">
-            <Button className="bg-[#f57c00] text-white hover:bg-[#e65100] px-6 py-5 rounded-full font-bold shadow-lg">
-              Devis en ligne 24/24h
-            </Button>
-          </Link>
+          <p className="text-gray-600 max-w-3xl mx-auto text-lg">
+            Bureau d'études et d'ingénierie spécialisé en performance énergétique, diagnostics immobiliers et formation professionnelle
+          </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
-            <Link
-              key={service.title}
-              href={service.href}
-              className={`group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 hover-lift ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${index * 80}ms` }}
-            >
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={service.image || "/placeholder.svg"}
-                  alt={service.title}
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div
-                  className="absolute top-4 left-4 w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg"
-                  style={{ backgroundColor: service.color }}
-                >
-                  {service.title.charAt(0)}
-                </div>
-              </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {companyInfo.services.map((service, index) => {
+            const Icon = serviceIcons[service.id as keyof typeof serviceIcons]
+            const delay = index * 100
 
-              {/* Content */}
-              <div className="p-6">
+            return (
+              <div
+                key={service.id}
+                className={`group bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl border-2 border-gray-100 hover:border-[#7cb342] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                }`}
+                style={{ transitionDelay: `${delay}ms` }}
+              >
+                {/* Icon */}
+                <div className="w-16 h-16 bg-gradient-to-br from-[#7cb342] to-[#689f38] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
+                  <Icon className="h-8 w-8 text-white" />
+                </div>
+
+                {/* Title */}
                 <h3 className="text-xl font-bold text-[#1e3a5f] mb-3 group-hover:text-[#7cb342] transition-colors">
-                  {service.title}
+                  {service.name}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">{service.description}</p>
-                <span className="inline-flex items-center gap-2 text-[#7cb342] font-semibold text-sm group-hover:gap-3 transition-all">
+
+                {/* Description */}
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  {service.description}
+                </p>
+
+                {/* CTA Link */}
+                <Link href="/services" className="inline-flex items-center gap-2 text-[#7cb342] font-semibold group-hover:gap-3 transition-all">
                   En savoir plus
                   <ArrowRight className="h-4 w-4" />
-                </span>
+                </Link>
+
+                {/* Decorative element */}
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <CheckCircle className="h-4 w-4 text-[#7cb342]" />
+                    <span>Expertise certifiée</span>
+                  </div>
+                </div>
               </div>
-            </Link>
-          ))}
+            )
+          })}
+        </div>
+
+        {/* CTA Button */}
+        <div className="text-center">
+          <Link href="/services">
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-[#7cb342] to-[#689f38] hover:from-[#689f38] hover:to-[#558b2f] text-white px-10 py-7 rounded-full text-lg font-bold shadow-2xl hover:shadow-[#7cb342]/50 transition-all group"
+            >
+              Découvrir tous nos services
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
